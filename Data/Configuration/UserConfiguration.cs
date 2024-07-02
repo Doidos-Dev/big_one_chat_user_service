@@ -11,7 +11,6 @@ namespace Data.Configuration
             builder.ToTable("users");
 
             builder.HasKey(x => x.Id);
-
             builder.Property(x => x.Name).HasColumnName("NAME").HasMaxLength(32).IsRequired();
             builder.Property(x => x.Nickname).HasColumnName("NICK_NAME").HasMaxLength(32).IsRequired();
             builder.Property(x => x.Status).HasColumnName("STATUS").IsRequired();

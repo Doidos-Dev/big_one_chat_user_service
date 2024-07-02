@@ -1,6 +1,10 @@
 ﻿using Data.Persistence;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Domain.Interfaces.Generic;
+using Data.Repositories.Generic;
+using Domain.Interfaces;
+using Data.Repositories;
 
 namespace DependencyInjection.Ext
 {
@@ -9,7 +13,8 @@ namespace DependencyInjection.Ext
         public static void AddConfig(this IServiceCollection services)
         {
             services
-                .DatabaseConfiguration();
+                .DatabaseConfiguration()
+                .AddRepositories();
         }
         static IServiceCollection DatabaseConfiguration(this IServiceCollection service)
         {
@@ -19,6 +24,15 @@ namespace DependencyInjection.Ext
             service.AddSingleton(p => new ContextRead(connectionString!));
             
             return service;
+        }
+
+        static IServiceCollection AddRepositories(this IServiceCollection services) 
+        {
+            services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISettingsRepository, SettingsRepository>();
+
+            return services;
         }
     }
 }
