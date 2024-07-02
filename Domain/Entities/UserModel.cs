@@ -1,10 +1,10 @@
-﻿using Domain.Enums;
+﻿using Domain.Entities.Base;
+using Domain.Enums;
 
 namespace Domain.Entities
 {
-    public class UserModel
+    public class UserModel:BaseEntity
     {
-        public Guid Id { get; private set; }
         public string? Name { get; private set; }
         public string? Nickname { get; private set; }
         public StatusEnum Status { get; private set; }
