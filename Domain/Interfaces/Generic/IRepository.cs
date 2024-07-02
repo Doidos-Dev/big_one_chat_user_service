@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces.Generic
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T>
     {
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T,bool>> expression);
         Task<T> GetAsync(Expression<Func<T,bool>> expression);
