@@ -1,7 +1,7 @@
 ﻿using Domain.Interfaces.Generic;
 using System.Linq.Expressions;
 
-namespace Data.Repositories
+namespace Data.Repositories.Generic
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -15,16 +15,6 @@ namespace Data.Repositories
         }
 
         public void Delete(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> GetAsync(Expression<Func<T, bool>> expression)
         {
             throw new NotImplementedException();
         }
