@@ -13,6 +13,7 @@ namespace Domain.Entities
         public string? Password { get; private set; }
         public DateTime? LastSeen { get; private set; }
         public DateTime? CreatedDate { get; private set; }
+        public SettingsModel? Settings { get; set; }
 
         public UserModel(Guid id,
             string name,

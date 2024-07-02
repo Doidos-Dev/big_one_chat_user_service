@@ -8,6 +8,7 @@ namespace Domain.Entities
         public bool IsVisibleStatus { get; private set; }
         public bool IsVisibleLastSeen { get; private set; }
         public bool IsVisibleMessageSeen { get; private set; }
+        public UserModel? User { get; set; }
 
         public SettingsModel(Guid id,
             Guid userId,
