@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
+using System.Data;
 
 namespace Data.Persistence
 {
-    internal class ContextRead
+    public class ContextRead(string stringConnection)
     {
+        private readonly string _stringConnection = stringConnection;
+        public IDbConnection Connection() => new NpgsqlConnection(_stringConnection);
     }
 }
