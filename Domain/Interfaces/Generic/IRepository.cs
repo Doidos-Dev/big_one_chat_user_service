@@ -7,5 +7,7 @@ namespace Domain.Interfaces.Generic
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
+        Task SaveChangesAsync();
+        void DisposeWrite();
     }
 }
