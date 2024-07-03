@@ -10,15 +10,16 @@ namespace DependencyInjection.Ext
 {
     public static class Configurations
     {
-        public static void AddConfig(this IServiceCollection services)
+        public static void AddConfig(this IServiceCollection services, string connectionString)
         {
             services
-                .DatabaseConfiguration()
+                .DatabaseConfiguration(connectionString)
                 .AddRepositories();
         }
-        static IServiceCollection DatabaseConfiguration(this IServiceCollection service)
+        static IServiceCollection DatabaseConfiguration(this IServiceCollection service, string connectionString)
         {
-            var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER");
+
+            Console.WriteLine(connectionString);
 
             service.AddDbContext<ContextCommand>(opt => opt.UseNpgsql(connectionString!));
             service.AddSingleton(p => new ContextRead(connectionString!));
