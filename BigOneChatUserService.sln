@@ -9,15 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9BDC73D1-95D3-49C6-BF69-B26F68C1BB33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{A81814EF-2429-4D03-9DB8-95069A553A44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{A81814EF-2429-4D03-9DB8-95069A553A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{6AEDEB90-C4A5-4346-8411-4DFA4117F060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{6AEDEB90-C4A5-4346-8411-4DFA4117F060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{0538FB0E-0FA8-4501-A803-CA2539508C9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{0538FB0E-0FA8-4501-A803-CA2539508C9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B605FD64-63B8-4CA7-A398-35A1D670DFB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{B605FD64-63B8-4CA7-A398-35A1D670DFB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{84D0D775-45F6-43D8-BF60-5F7EF2C87F5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{84D0D775-45F6-43D8-BF60-5F7EF2C87F5E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9B9E37C2-C583-41FA-9D88-D87D8143BBC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{84D0D775-45F6-43D8-BF60-5F7EF2C87F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84D0D775-45F6-43D8-BF60-5F7EF2C87F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84D0D775-45F6-43D8-BF60-5F7EF2C87F5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9E37C2-C583-41FA-9D88-D87D8143BBC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9E37C2-C583-41FA-9D88-D87D8143BBC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9E37C2-C583-41FA-9D88-D87D8143BBC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9E37C2-C583-41FA-9D88-D87D8143BBC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

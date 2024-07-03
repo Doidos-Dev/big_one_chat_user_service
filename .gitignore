@@ -290,3 +290,4 @@ __pycache__/
 docker-compose.bat
 docker-compose.yml
 docker-compose.debug.yml
+/API/appsettings.json
