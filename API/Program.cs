@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var environment = APIConfiguration.LocalEnvironment;
+var environment = APIConfiguration.DockerEnvironment;
 
 builder.Services.AddConfig(environment == APIConfiguration.LocalEnvironment
     ? builder.Configuration["Postgres:ConnectionStrings"]

@@ -3,8 +3,10 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
+COPY ["Certificates/aspnetapp.pfx", "Certificates/"]
 EXPOSE 8080
 EXPOSE 8081
+
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -17,6 +19,8 @@ RUN dotnet restore "./API/API.csproj"
 COPY . .
 WORKDIR "/src/API"
 RUN dotnet build "./API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+RUN dotnet dev-certs https --trust
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
