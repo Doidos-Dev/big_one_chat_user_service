@@ -5,24 +5,31 @@ using Domain.Interfaces.Generic;
 using Data.Repositories.Generic;
 using Domain.Interfaces;
 using Data.Repositories;
+using Microsoft.Extensions.Configuration;
+using Data;
 
 namespace DependencyInjection.Ext
 {
     public static class Configurations
     {
-        public static void AddConfig(this IServiceCollection services, string connectionString)
+        public static void AddConfig(this IServiceCollection services, string applicationStage)
         {
             services
-                .DatabaseConfiguration(connectionString)
+                .DatabaseConfiguration(applicationStage)
                 .AddRepositories();
         }
-        static IServiceCollection DatabaseConfiguration(this IServiceCollection service, string connectionString)
+        static IServiceCollection DatabaseConfiguration(this IServiceCollection service, string applicationStage)
         {
 
-            Console.WriteLine(connectionString);
+            service.AddDbContext<ContextCommand>(opt => opt.UseNpgsql(applicationStage == DataConfigurations.LocalEnvironment
+                ? Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER")!
+                : Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER_LOCAL")!));
 
-            service.AddDbContext<ContextCommand>(opt => opt.UseNpgsql(connectionString!));
-            service.AddSingleton(p => new ContextRead(connectionString!));
+            //Console.WriteLine(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER_LOCAL"));
+
+            service.AddSingleton(p => new ContextRead(applicationStage == DataConfigurations.LocalEnvironment
+                ? Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER")!
+                : Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER_LOCAL")!));
             
             return service;
         }
