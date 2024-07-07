@@ -7,9 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var environment = APIConfiguration.LocalEnvironment;
-
-builder.Services.AddConfig(environment);
+builder.Services.AddConfig(builder.Configuration);
 
 var app = builder.Build();
 
