@@ -12,24 +12,20 @@ namespace DependencyInjection.Ext
 {
     public static class Configurations
     {
-        public static void AddConfig(this IServiceCollection services, string applicationStage)
+        public static void AddConfig(this IServiceCollection services,IConfiguration configuration)
         {
             services
-                .DatabaseConfiguration(applicationStage)
+                .DatabaseConfiguration(configuration)
                 .AddRepositories();
         }
-        static IServiceCollection DatabaseConfiguration(this IServiceCollection service, string applicationStage)
+        static IServiceCollection DatabaseConfiguration(this IServiceCollection service , IConfiguration connection)
         {
+            string connectionString =
+                Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER") ?? connection.GetConnectionString("Local")!;
 
-            service.AddDbContext<ContextCommand>(opt => opt.UseNpgsql(applicationStage == DataConfigurations.LocalEnvironment
-                ? Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER")!
-                : Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER_LOCAL")!));
+            service.AddDbContext<ContextCommand>(opt => opt.UseNpgsql(connectionString));
 
-            //Console.WriteLine(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER_LOCAL"));
-
-            service.AddSingleton(p => new ContextRead(applicationStage == DataConfigurations.LocalEnvironment
-                ? Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER")!
-                : Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER_LOCAL")!));
+            service.AddSingleton(p => new ContextRead(connectionString));
             
             return service;
         }
