@@ -3,16 +3,16 @@ using Domain.Enums;
 
 namespace Domain.Entities
 {
-    public class UserModel:BaseEntity
+    public class UserModel : BaseEntity
     {
         public string? Name { get; private set; }
         public string? Nickname { get; private set; }
         public StatusEnum Status { get; private set; }
-        public string? Photo {  get; private set; }
+        public string? Photo { get; private set; }
         public string? Email { get; private set; }
         public string? Password { get; private set; }
         public DateTime? LastSeen { get; private set; }
-        public DateTime? CreatedDate { get; private set; }
+        public DateTime CreatedDate { get; private set; }
         public SettingsModel? Settings { get; set; }
 
         public UserModel(Guid id,
@@ -23,7 +23,7 @@ namespace Domain.Entities
             string email,
             string password,
             DateTime? lastSeen,
-            DateTime? createdDate)
+            DateTime createdDate)
         {
             Id = id;
             Name = name;
@@ -36,9 +36,32 @@ namespace Domain.Entities
             CreatedDate = createdDate;
         }
 
-        public UserModel()
+        public UserModel(Guid id,
+            string name,
+            string nickname,
+            string photo,
+            string email,
+            string password)
         {
-            
+            Id = id;
+            Name = name;
+            Nickname = nickname;
+            Photo = photo;
+            Email = email;
+            Password = password;
+        }
+
+        public void EncryptPasswordEntity(string passwordEncrypted)
+        {
+            Password = passwordEncrypted;
+        }
+
+        public void ChangeStatus()
+        {
+            if (Status == StatusEnum.Online)
+                Status = StatusEnum.Offline;
+            else
+                Status = StatusEnum.Online;
         }
     }
 }
