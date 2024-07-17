@@ -31,7 +31,7 @@ namespace Application.Mappings
                 dto.Email,
                 dto.Password,
                 null,
-                DateTime.Now);
+                DateTime.Now.ToUniversalTime());
         }
 
         public static UserModel ToEntityInputUpdate(this UserUpdateDTO dto)
@@ -45,7 +45,7 @@ namespace Application.Mappings
                 dto.Password);
         }
 
-        public static IEnumerable<UserOutputDTO> ToDTO(IEnumerable<UserModel> entity)
+        public static IEnumerable<UserOutputDTO> ToDTO(this IEnumerable<UserModel> entity)
         {
             return entity.Select(p => p.ToDTO());
         }

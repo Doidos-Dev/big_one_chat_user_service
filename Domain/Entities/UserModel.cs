@@ -51,6 +51,20 @@ namespace Domain.Entities
             Password = password;
         }
 
+        public UserModel(
+            Guid id,
+            string name,
+            string nickname,
+            string photo,
+            StatusEnum status)
+        {
+            Id = id;
+            Name = name;
+            Nickname = nickname;
+            Photo = photo;
+            Status = status;
+        }
+
         public void EncryptPasswordEntity(string passwordEncrypted)
         {
             Password = passwordEncrypted;

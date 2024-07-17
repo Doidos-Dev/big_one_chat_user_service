@@ -7,10 +7,6 @@ namespace Data.Repositories
 {
     public class SettingsRepository : Repository<SettingsModel>,ISettingsRepository
     {
-        private readonly ContextRead _contextRead;
-        public SettingsRepository(ContextCommand contextCommand,ContextRead contextRead) : base(contextCommand)
-        {
-            _contextRead = contextRead;
-        }
+        public SettingsRepository(DatabaseContext contextCommand) : base(contextCommand){}
     }
 }

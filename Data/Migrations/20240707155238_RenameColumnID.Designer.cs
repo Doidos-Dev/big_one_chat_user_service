@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Migrations
 {
-    [DbContext(typeof(ContextCommand))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20240707155238_RenameColumnID")]
     partial class RenameColumnID
     {
