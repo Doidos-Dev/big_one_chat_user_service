@@ -1,37 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using UserService.Test.Domain.Interfaces.Generic;
+using UserService.Test.Infraestructure.Data.Persistence;
 
 namespace UserService.Test.Infraestructure.Data.Repositories.Generic
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public void Create(T entity)
+        protected readonly DatabaseContext _databaseContext;
+        protected readonly DbSet<T> _dbSet;
+
+        public Repository(DatabaseContext databaseContext)
         {
-            throw new NotImplementedException();
+            _databaseContext = databaseContext;
+            _dbSet = _databaseContext.Set<T>();
         }
 
-        public void Delete(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisposeWrite()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public void Create(T entity) => _dbSet.Add(entity);
+        public void Update(T entity) => _databaseContext.Entry(entity).State = EntityState.Modified;
+        public void Delete(T entity) => _dbSet.Remove(entity);
+        public void Dispose() => _databaseContext.Dispose();
+        public async Task SaveChangesAsync() => await _databaseContext.SaveChangesAsync();
     }
 }

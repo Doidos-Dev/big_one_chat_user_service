@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService.Test.Application.Helper
+namespace UserService.Test.Infraestructure.Data
 {
-    internal class Class1
+    public class DataConfigurations
     {
     }
 }

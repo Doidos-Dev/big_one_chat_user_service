@@ -7,6 +7,5 @@ namespace UserService.Test.Domain.Interfaces.Generic
         void Update(T entity);
         void Delete(T entity);
         Task SaveChangesAsync();
-        void DisposeWrite();
     }
 }

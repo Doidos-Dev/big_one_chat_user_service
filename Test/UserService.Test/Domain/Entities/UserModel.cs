@@ -13,18 +13,18 @@ namespace UserService.Test.Domain.Entities
         public string? Email { get; private set; }
         public string? Password { get; private set; }
         public DateTime? LastSeen { get; private set; }
-        public DateTime? CreatedDate { get; private set; }
+        public DateTime CreatedDate { get; private set; }
         public SettingsModel? Settings { get; set; }
 
         public UserModel(Guid id,
-            string name,
-            string nickname,
-            StatusEnum status,
-            string photo,
-            string email,
-            string password,
-            DateTime? lastSeen,
-            DateTime? createdDate)
+           string name,
+           string nickname,
+           StatusEnum status,
+           string photo,
+           string email,
+           string password,
+           DateTime? lastSeen,
+           DateTime createdDate)
         {
             Id = id;
             Name = name;
@@ -37,9 +37,33 @@ namespace UserService.Test.Domain.Entities
             CreatedDate = createdDate;
         }
 
-        public UserModel()
+        public UserModel(Guid id,
+            string name,
+            string nickname,
+            string photo,
+            string email,
+            string password)
         {
+            Id = id;
+            Name = name;
+            Nickname = nickname;
+            Photo = photo;
+            Email = email;
+            Password = password;
+        }
 
+        public UserModel(
+            Guid id,
+            string name,
+            string nickname,
+            string photo,
+            StatusEnum status)
+        {
+            Id = id;
+            Name = name;
+            Nickname = nickname;
+            Photo = photo;
+            Status = status;
         }
 
         public void EncryptPasswordEntity(string passwordEncrypted)
