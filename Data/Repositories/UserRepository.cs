@@ -2,15 +2,34 @@
 using Data.Repositories.Generic;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
     public class UserRepository : Repository<UserModel>, IUserRepository
     {
-        private readonly ContextRead _contextRead;
-        public UserRepository(ContextCommand contextCommand,ContextRead contextRead) : base(contextCommand)
+        public UserRepository(DatabaseContext databaseContext) : base(databaseContext)
         {
-            _contextRead = contextRead;
+        }
+
+        public async Task<IEnumerable<UserModel>> GetAll()
+        {
+            var users = await _dbSet
+                .AsNoTracking()
+                .Select(p => new UserModel(p.Id,p.Name!,p.Nickname!,p.Photo!,p.Status))
+                .ToListAsync();
+
+            return users;
+        }
+
+        public async Task<UserModel> GetUser(Guid id)
+        {
+            var user = await _dbSet
+                .AsNoTracking()
+                .Select(p => new UserModel(p.Id,p.Name!,p.Nickname!,p.Photo!,p.Email!,p.Password!))
+                .FirstAsync();
+
+            return user;
         }
     }
 }

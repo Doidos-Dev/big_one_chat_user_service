@@ -7,34 +7,42 @@ using Domain.Interfaces;
 using Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Data;
+using Application.Services;
+using Application.Services.Implementations;
 
 namespace DependencyInjection.Ext
 {
     public static class Configurations
     {
-        public static void AddConfig(this IServiceCollection services,IConfiguration configuration)
+        public static void AddConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services
                 .DatabaseConfiguration(configuration)
-                .AddRepositories();
+                .AddRepositories()
+                .AddServices();
         }
-        static IServiceCollection DatabaseConfiguration(this IServiceCollection service , IConfiguration connection)
+        static IServiceCollection DatabaseConfiguration(this IServiceCollection service, IConfiguration connection)
         {
             string connectionString =
                 Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER") ?? connection.GetConnectionString("Local")!;
 
-            service.AddDbContext<ContextCommand>(opt => opt.UseNpgsql(connectionString));
+            service.AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString));
 
-            service.AddSingleton(p => new ContextRead(connectionString));
-            
             return service;
         }
 
-        static IServiceCollection AddRepositories(this IServiceCollection services) 
+        static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
+
+            return services;
+        }
+
+        static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

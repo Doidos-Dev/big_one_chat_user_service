@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.DTOs.Input;
+using Application.DTOs.Output;
+using Application.Responses;
+using Application.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -6,5 +10,33 @@ namespace API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<APIResponse<UserOutputDTO>>> GetAll()
+        {
+            var users = await _userService.AllUsers();
+
+            return users;
+        }
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<APIResponse<UserOutputDTO>>> Get(Guid id)
+        {
+            var user = await _userService.User(id);
+
+            return user;
+        }
+        [HttpPost]
+        public async Task<ActionResult<APIResponse<UserOutputDTO>>> Post(UserCreateDTO userCreateDTO)
+        {
+            var userCreate = await _userService.CreateUser(userCreateDTO);
+
+            return userCreate;
+        }
     }
 }
