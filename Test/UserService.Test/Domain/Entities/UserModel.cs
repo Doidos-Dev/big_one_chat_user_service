@@ -41,5 +41,18 @@ namespace UserService.Test.Domain.Entities
         {
 
         }
+
+        public void EncryptPasswordEntity(string passwordEncrypted)
+        {
+            Password = passwordEncrypted;
+        }
+
+        public void ChangeStatus()
+        {
+            if (Status == StatusEnum.Online)
+                Status = StatusEnum.Offline;
+            else
+                Status = StatusEnum.Online;
+        }
     }
 }

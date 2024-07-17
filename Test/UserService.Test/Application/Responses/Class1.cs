@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService.Test.Application.DTOs.User.ViewDTO
+namespace UserService.Test.Application.Responses
 {
     internal class Class1
     {

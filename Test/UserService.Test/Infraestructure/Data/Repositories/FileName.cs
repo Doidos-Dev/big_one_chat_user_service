@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService.Test.Application.DTOs.User.InputDTO
+namespace UserService.Test.Infraestructure.Data.Repositories
 {
-    internal class Class1
+    internal class FileName
     {
     }
 }
