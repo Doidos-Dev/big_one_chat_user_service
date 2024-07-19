@@ -61,6 +61,22 @@ namespace Application.Services.Implementations
                 null);
         }
 
+        public async Task<APIResponse<UserOutputDTO>> DeleteUser(Guid userId)
+        {
+            var user = await _userRepository.GetUser(userId);
+
+            _userRepository.Delete(user);
+
+            await _userRepository.SaveChangesAsync();
+
+            return Message.Response<UserOutputDTO>(
+                codeResponse: CodeEnum.OK,
+                message: Operation.DELETE_RECORD,
+                isOperationSuccess: true,
+                results: [],
+                null);
+        }
+
         public async Task<APIResponse<UserOutputDTO>> User(Guid userId)
         {
             var user = await _userRepository.GetUser(userId);

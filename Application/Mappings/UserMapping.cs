@@ -13,7 +13,7 @@ namespace Application.Mappings
                 userModel.Id,
                 userModel.Name!,
                 userModel.Nickname!,
-                userModel.Status == StatusEnum.Online ? "online" : "offline",
+                userModel.Status,
                 userModel.Photo!,
                 userModel.Email!,
                 userModel.Password!,
