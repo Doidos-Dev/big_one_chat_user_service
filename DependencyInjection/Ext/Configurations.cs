@@ -26,7 +26,7 @@ namespace DependencyInjection.Ext
             string connectionString =
                 Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER") ?? connection.GetConnectionString("Local")!;
 
-            service.AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString));
+            service.AddDbContextPool<DatabaseContext>(opt => opt.UseNpgsql(connectionString));
 
             return service;
         }
