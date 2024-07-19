@@ -11,12 +11,12 @@ namespace Data.Repositories
         public UserRepository(DatabaseContext databaseContext) : base(databaseContext)
         {
         }
-
+        
         public async Task<IEnumerable<UserModel>> GetAll()
         {
             var users = await _dbSet
                 .AsNoTracking()
-                .Select(p => new UserModel(p.Id,p.Name!,p.Nickname!,p.Photo!,p.Status))
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Status))
                 .ToListAsync();
 
             return users;
@@ -26,10 +26,11 @@ namespace Data.Repositories
         {
             var user = await _dbSet
                 .AsNoTracking()
+                .Where(p => p.Id == id)
                 .Select(p => new UserModel(p.Id,p.Name!,p.Nickname!,p.Photo!,p.Email!,p.Password!))
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
-            return user;
+            return user!;
         }
     }
 }

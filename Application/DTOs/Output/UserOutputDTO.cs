@@ -1,10 +1,12 @@
-﻿namespace Application.DTOs.Output
+﻿using Domain.Enums;
+
+namespace Application.DTOs.Output
 {
     public record UserOutputDTO(
         Guid Id,
         string Name,
         string Nickname,
-        string Status,
+        StatusEnum Status,
         string Photo,
         string Email,
         string Password,
