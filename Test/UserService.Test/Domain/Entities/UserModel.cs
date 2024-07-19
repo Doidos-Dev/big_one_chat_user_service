@@ -78,5 +78,9 @@ namespace UserService.Test.Domain.Entities
             else
                 Status = StatusEnum.Online;
         }
+
+        public void ChangeNickName(string newNickName)
+            => Nickname = newNickName;
+        
     }
 }

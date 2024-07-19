@@ -17,5 +17,6 @@ namespace UserService.Test.Infraestructure.Data.Persistence
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
         }
+
     }
 }

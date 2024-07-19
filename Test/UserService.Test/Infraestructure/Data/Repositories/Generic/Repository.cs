@@ -16,7 +16,7 @@ namespace UserService.Test.Infraestructure.Data.Repositories.Generic
         }
 
         public void Create(T entity) => _dbSet.Add(entity);
-        public void Update(T entity) => _databaseContext.Entry(entity).State = EntityState.Modified;
+        public void Update(T entity) => _databaseContext.Update(entity).State = EntityState.Modified;
         public void Delete(T entity) => _dbSet.Remove(entity);
         public void Dispose() => _databaseContext.Dispose();
         public async Task SaveChangesAsync() => await _databaseContext.SaveChangesAsync();

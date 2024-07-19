@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UserService.Test.Application.DTOs.Input;
+﻿using UserService.Test.Application.DTOs.Input;
 using UserService.Test.Application.DTOs.Output;
 using UserService.Test.Application.Enums;
 using UserService.Test.Application.Helper;
@@ -13,11 +8,11 @@ using UserService.Test.Domain.Interfaces;
 
 namespace UserService.Test.Application.Services.Implementations
 {
-    public class UserService : IUserService
+    public class UserServiceTest : IUserService
     {
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserServiceTest(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

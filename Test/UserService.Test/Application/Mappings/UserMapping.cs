@@ -45,6 +45,18 @@ namespace UserService.Test.Application.Mappings
                 dto.Password);
         }
 
+        public static UserUpdateDTO ToUpdateDTO(this UserModel entity)
+        {
+            return new UserUpdateDTO(
+                entity.Id,
+                entity.Name!,
+                entity.Nickname!,
+                entity.Photo!,
+                entity.Email!,
+                entity.Password!
+                );
+        }
+
         public static IEnumerable<UserOutputDTO> ToDTO(this IEnumerable<UserModel> entity)
         {
             return entity.Select(p => p.ToDTO());
