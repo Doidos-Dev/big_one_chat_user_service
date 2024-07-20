@@ -15,5 +15,10 @@ namespace UserService.Test.Application.Mappings
         {
             return new SettingsOutputDTO(entity.Id, entity.UserId, entity.IsVisibleStatus, entity.IsVisibleLastSeen, entity.IsVisibleMessageSeen);
         }
+
+        public static IEnumerable<SettingsOutputDTO> ToDTO(this IEnumerable<SettingsModel> entity)
+        {
+            return entity.Select(p => p.ToDTO());
+        }
     }
 }

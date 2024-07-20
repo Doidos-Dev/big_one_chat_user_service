@@ -14,7 +14,8 @@ namespace UserService.Test
     {
         private readonly UserRepository _userRepository;
         private readonly UserServiceTest _userService;
-        private readonly DatabaseContext _databaseContext = DatabaseUtils.CreateDbContextInstance();
+        private readonly static string _databaseName = "UserTestDatabase";
+        private readonly DatabaseContext _databaseContext = DatabaseUtils.CreateDbContextInstance(_databaseName);
 
         public UserUnitTests()
         {

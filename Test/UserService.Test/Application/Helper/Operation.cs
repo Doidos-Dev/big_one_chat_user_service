@@ -16,5 +16,7 @@ namespace UserService.Test.Application.Helper
         public static readonly string DELETE_RECORD = "Registration Deleted Successfully!";
         public static readonly string USER_EXISTS = "This user already exists!";
         public static readonly string DELETE_FAILED = "Unfortunately it was not possible to remove!";
+
+        public static readonly string GET_SPECIFY_SETTINGS_NOTFOUND = "This settings not exists!";
     }
 }

@@ -10,10 +10,10 @@ namespace UserService.Test.Infraestructure.Data.Helper
 {
     public static class DatabaseUtils
     {
-        public static DatabaseContext CreateDbContextInstance()
+        public static DatabaseContext CreateDbContextInstance(string databaseName)
         {
             var options = new DbContextOptionsBuilder<DatabaseContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .UseInMemoryDatabase(databaseName: databaseName)
                 .Options;
 
             var dbContext = new DatabaseContext(options);
@@ -26,6 +26,7 @@ namespace UserService.Test.Infraestructure.Data.Helper
         public static void ClearDatabase(DatabaseContext context)
         {
             context.RemoveRange(context.Users);
+            context.RemoveRange(context.Settings);
             context.SaveChanges();
         }
     }
