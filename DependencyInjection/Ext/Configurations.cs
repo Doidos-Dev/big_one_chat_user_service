@@ -6,7 +6,6 @@ using Data.Repositories.Generic;
 using Domain.Interfaces;
 using Data.Repositories;
 using Microsoft.Extensions.Configuration;
-using Data;
 using Application.Services;
 using Application.Services.Implementations;
 

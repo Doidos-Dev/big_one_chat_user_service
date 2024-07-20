@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240707161311_RenameColumnIDAlter")]
-    partial class RenameColumnIDAlter
+    [Migration("20240720145448_RenameColumnPhotoToPhotoUrl")]
+    partial class RenameColumnPhotoToPhotoUrl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,7 +63,7 @@ namespace Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("ID");
 
-                    b.Property<DateTime?>("CreatedDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CREATED_DATE");
 
@@ -99,7 +99,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
-                        .HasColumnName("PHOTO");
+                        .HasColumnName("PHOTO_URL");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")

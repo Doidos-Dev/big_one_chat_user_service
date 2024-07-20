@@ -15,7 +15,7 @@ namespace Data.Configuration
             builder.Property(x => x.Name).HasColumnName("NAME").HasMaxLength(32).IsRequired();
             builder.Property(x => x.Nickname).HasColumnName("NICK_NAME").HasMaxLength(32).IsRequired();
             builder.Property(x => x.Status).HasColumnName("STATUS").IsRequired();
-            builder.Property(x => x.Photo).HasColumnName("PHOTO").HasMaxLength(255).IsRequired();
+            builder.Property(x => x.PhotoUrl).HasColumnName("PHOTO_URL").HasMaxLength(255).IsRequired();
             builder.Property(x => x.Email).HasColumnName("EMAIL").HasMaxLength(128).IsRequired();
             builder.Property(x => x.Password).HasColumnName("PASSWORD").HasMaxLength(128).IsRequired();
             builder.Property(x => x.LastSeen).HasColumnName("LAST_SEEN");

@@ -3,6 +3,7 @@ using Data.Repositories.Generic;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Data.Repositories
 {
@@ -11,26 +12,35 @@ namespace Data.Repositories
         public UserRepository(DatabaseContext databaseContext) : base(databaseContext)
         {
         }
-        
-        public async Task<IEnumerable<UserModel>> GetAll()
+
+        public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
             var users = await _dbSet
                 .AsNoTracking()
-                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Status))
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.PhotoUrl!, p.Status))
                 .ToListAsync();
 
             return users;
         }
 
-        public async Task<UserModel> GetUser(Guid id)
+        public async Task<UserModel> GetUserAsync(Expression<Func<UserModel,bool>> predicate)
         {
             var user = await _dbSet
                 .AsNoTracking()
-                .Where(p => p.Id == id)
-                .Select(p => new UserModel(p.Id,p.Name!,p.Nickname!,p.Photo!,p.Email!,p.Password!))
+                .Where(predicate)
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.PhotoUrl!, p.Email!, p.Password!))
                 .FirstOrDefaultAsync();
 
             return user!;
+        }
+
+        public async Task<bool> ExistsAsync(Expression<Func<UserModel, bool>> predicate)
+        {
+            var userExists = await _dbSet
+                .AsNoTracking()
+                .AnyAsync(predicate);
+
+            return userExists;
         }
     }
 }
