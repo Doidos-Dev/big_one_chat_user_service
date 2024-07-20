@@ -31,7 +31,8 @@ namespace UserService.Test.Application.Mappings
                 dto.Email,
                 dto.Password,
                 null,
-                DateTime.Now.ToUniversalTime());
+                DateTime.Now.ToUniversalTime()
+                );
         }
 
         public static UserModel ToEntityInputUpdate(this UserUpdateDTO dto)

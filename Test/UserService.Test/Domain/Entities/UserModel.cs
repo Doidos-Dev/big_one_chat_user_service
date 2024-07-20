@@ -35,6 +35,9 @@ namespace UserService.Test.Domain.Entities
             Password = password;
             LastSeen = lastSeen;
             CreatedDate = createdDate;
+            Settings = new SettingsModel(
+                Guid.NewGuid(), Id ,true, true, true
+                );
         }
 
         public UserModel(Guid id,
