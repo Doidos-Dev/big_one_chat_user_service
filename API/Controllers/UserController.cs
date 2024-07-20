@@ -31,6 +31,9 @@ namespace API.Controllers
         {
             var userCreate = await _userService.CreateUser(userCreateDTO);
 
+            if (!userCreate.IsOperationSuccess)
+                return BadRequest(userCreate);
+
             return userCreate;
         }
         [HttpPut]
@@ -40,10 +43,13 @@ namespace API.Controllers
 
             return userUpdate;
         }
-        [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<APIResponse<UserOutputDTO>>> Delete(Guid id)
+        [HttpDelete]
+        public async Task<ActionResult<APIResponse<UserOutputDTO>>> Delete(UserDeleteDTO userDeleteDTO)
         {
-            var userDelete = await _userService.DeleteUser(id);
+            var userDelete = await _userService.DeleteUser(userDeleteDTO);
+
+            if (!userDelete.IsOperationSuccess)
+                return BadRequest(userDelete);
 
             return userDelete;
         } 

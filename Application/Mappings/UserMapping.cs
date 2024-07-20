@@ -14,7 +14,7 @@ namespace Application.Mappings
                 userModel.Name!,
                 userModel.Nickname!,
                 userModel.Status,
-                userModel.Photo!,
+                userModel.PhotoUrl!,
                 userModel.Email!,
                 userModel.Password!,
                 userModel.LastSeen,
@@ -31,7 +31,7 @@ namespace Application.Mappings
                 dto.Email,
                 dto.Password,
                 null,
-                DateTime.Now.ToUniversalTime());
+                DateTimeOffset.UtcNow);
         }
 
         public static UserModel ToEntityInputUpdate(this UserUpdateDTO dto)

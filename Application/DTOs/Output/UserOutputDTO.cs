@@ -10,6 +10,6 @@ namespace Application.DTOs.Output
         string Photo,
         string Email,
         string Password,
-        DateTime? LastSeen,
-        DateTime CreatedDate);
+        DateTimeOffset? LastSeen,
+        DateTimeOffset CreatedDate);
 }

@@ -63,7 +63,7 @@ namespace Data.Migrations
                         .HasColumnType("character varying(128)")
                         .HasColumnName("PASSWORD");
 
-                    b.Property<string>("Photo")
+                    b.Property<string>("PhotoUrl")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")

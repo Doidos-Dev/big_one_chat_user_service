@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace Domain.Interfaces.Generic
+﻿namespace Domain.Interfaces.Generic
 {
     public interface IRepository<T>
     {
