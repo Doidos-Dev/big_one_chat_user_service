@@ -1,11 +1,16 @@
-﻿using Data.Persistence;
-using Data.Repositories.Generic;
-using Domain.Entities;
-using Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+using UserService.Test.Domain.Entities;
+using UserService.Test.Domain.Interfaces;
+using UserService.Test.Infraestructure.Data.Persistence;
+using UserService.Test.Infraestructure.Data.Repositories.Generic;
 
-namespace Data.Repositories
+namespace UserService.Test.Infraestructure.Data.Repositories
 {
     public class SettingsRepository : Repository<SettingsModel>, ISettingsRepository
     {
@@ -26,7 +31,7 @@ namespace Data.Repositories
                 .Where(predicate)
                 .FirstOrDefaultAsync();
 
-            return settings!;
+            return settings!;    
         }
 
         public async Task<SettingsModel> GetSettingsAsNoTrackingAsync(Expression<Func<SettingsModel, bool>> predicate)
@@ -41,5 +46,7 @@ namespace Data.Repositories
 
         public void DetacheTrackingModel(SettingsModel entity)
             => _databaseContext.Entry(entity).State = EntityState.Detached;
+
+
     }
 }

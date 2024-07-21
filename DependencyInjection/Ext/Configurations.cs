@@ -42,6 +42,7 @@ namespace DependencyInjection.Ext
         static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISettingsService, SettingsService>();
 
             return services;
         }

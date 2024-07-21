@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UserService.Test.Application.DTOs.Output
 {
-    public record UserOutput
+    public record UserOutputDTO
         (
         Guid Id,
         string Name,

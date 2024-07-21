@@ -3,6 +3,7 @@ using System;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class ContextCommandModelSnapshot : ModelSnapshot
+    [Migration("20240719163846_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,6 @@ namespace Data.Migrations
                         .HasColumnName("ID");
 
                     b.Property<DateTime>("CreatedDate")
-
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CREATED_DATE");
 
@@ -71,7 +73,7 @@ namespace Data.Migrations
                         .HasColumnType("character varying(128)")
                         .HasColumnName("EMAIL");
 
-                    b.Property<DateTimeOffset?>("LastSeen")
+                    b.Property<DateTime?>("LastSeen")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("LAST_SEEN");
 
@@ -93,11 +95,11 @@ namespace Data.Migrations
                         .HasColumnType("character varying(128)")
                         .HasColumnName("PASSWORD");
 
-                    b.Property<string>("PhotoUrl")
+                    b.Property<string>("Photo")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
-                        .HasColumnName("PHOTO_URL");
+                        .HasColumnName("PHOTO");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")

@@ -7,7 +7,8 @@ namespace Domain.Interfaces
     public interface IUserRepository : IRepository<UserModel>
     {
         Task<IEnumerable<UserModel>> GetAllAsync();
-        Task<UserModel> GetUserAsync(Expression<Func<UserModel,bool>> predicate);
+        Task<UserModel> GetUserAsNoTrackingAsync(Expression<Func<UserModel, bool>> predicate);
+        Task<UserModel> GetUserTrackingAsync(Expression<Func<UserModel, bool>> predicate);
         Task<bool> ExistsAsync(Expression<Func<UserModel, bool>> predicate);
     }
 }

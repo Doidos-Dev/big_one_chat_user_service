@@ -4,9 +4,9 @@ using UserService.Test.Domain.Entities;
 
 namespace UserService.Test.Infraestructure.Data.Persistence
 {
-    public class ContextCommand : DbContext
+    public class DatabaseContext : DbContext
     {
-        public ContextCommand(DbContextOptions<ContextCommand> options) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
 
@@ -15,7 +15,8 @@ namespace UserService.Test.Infraestructure.Data.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ContextCommand).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
         }
+
     }
 }

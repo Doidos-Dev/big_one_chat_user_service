@@ -1,36 +1,24 @@
-﻿using Application.DTOs.Input;
-using Application.DTOs.Output;
-using Application.Enums;
-using Application.Helper;
-using Application.Mappings;
-using Application.Responses;
-using Domain.Interfaces;
+﻿using UserService.Test.Application.DTOs.Input;
+using UserService.Test.Application.DTOs.Output;
+using UserService.Test.Application.Enums;
+using UserService.Test.Application.Helper;
+using UserService.Test.Application.Mappings;
+using UserService.Test.Application.Responses;
+using UserService.Test.Domain.Interfaces;
 
-namespace Application.Services.Implementations
+namespace UserService.Test.Application.Services.Implementations
 {
-    public class UserService : IUserService
+    public class UserServiceTest : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+
+        public UserServiceTest(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<APIResponse<UserOutputDTO>> AllUsers()
-        {
-            var users = await _userRepository.GetAllAsync();
-
-            return Message.Response(
-                codeResponse: CodeEnum.OK,
-                message: Operation.GET_ALL,
-                isOperationSuccess: true,
-                results: users.ToDTO(),
-                result: null);
-        }
-
         public async Task<APIResponse<UserOutputDTO>> CreateUser(UserCreateDTO userDTO)
         {
-
             bool userExist = await _userRepository.ExistsAsync(x => x.Nickname == userDTO.NickName);
 
             if (userExist)
@@ -50,6 +38,18 @@ namespace Application.Services.Implementations
                 isOperationSuccess: true,
                 results: [],
                 null);
+        }
+
+        public async Task<APIResponse<UserOutputDTO>> AllUsers()
+        {
+            var users = await _userRepository.GetAllAsync();
+
+            return Message.Response(
+                codeResponse: CodeEnum.OK,
+                message: Operation.GET_ALL,
+                isOperationSuccess: true,
+                results: users.ToDTO(),
+                result: null);
         }
 
         public async Task<APIResponse<UserOutputDTO>> User(Guid userId)
@@ -74,6 +74,8 @@ namespace Application.Services.Implementations
                 user.ToDTO());
         }
 
+
+
         public async Task<APIResponse<UserOutputDTO>> UpdateUser(UserUpdateDTO userDTO)
         {
             var usuarioEntity = userDTO.ToEntityInputUpdate();
@@ -89,11 +91,10 @@ namespace Application.Services.Implementations
                 results: [],
                 null);
         }
-        
+
         public async Task<APIResponse<UserOutputDTO>> RemoveUser(UserDeleteDTO userDTO)
         {
             var entity = await _userRepository.GetUserTrackingAsync(x => x.Nickname == userDTO.Nickname);
-
 
             if (entity is null)
                 return Message.Response<UserOutputDTO>(
@@ -121,5 +122,6 @@ namespace Application.Services.Implementations
                 null
                 );
         }
+
     }
 }

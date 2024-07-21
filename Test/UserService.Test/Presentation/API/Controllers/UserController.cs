@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService.Test.Infraestructure.Data.Repositories
+namespace UserService.Test.Presentation.API.Controllers
 {
-    internal class FileName
+    public class UserController
     {
     }
 }

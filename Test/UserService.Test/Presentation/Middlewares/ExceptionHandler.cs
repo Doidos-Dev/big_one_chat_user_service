@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService.Test.Application.Responses
+namespace UserService.Test.Presentation.Middlewares
 {
-    internal class Class1
+    public class ExceptionHandler
     {
     }
 }

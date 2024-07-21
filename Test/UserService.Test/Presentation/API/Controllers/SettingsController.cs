@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService.Test.Application.Mappings
+namespace UserService.Test.Presentation.API.Controllers
 {
-    internal class Class1
+    public class SettingsController
     {
     }
 }

@@ -1,8 +1,13 @@
-﻿using Application.DTOs.Input;
-using Application.DTOs.Output;
-using Application.Responses;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UserService.Test.Application.DTOs.Input;
+using UserService.Test.Application.DTOs.Output;
+using UserService.Test.Application.Responses;
 
-namespace Application.Services
+namespace UserService.Test.Application.Services
 {
     public interface IUserService
     {

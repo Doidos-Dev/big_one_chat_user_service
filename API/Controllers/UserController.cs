@@ -19,6 +19,7 @@ namespace API.Controllers
 
             return users;
         }
+
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Get(Guid id)
         {
@@ -26,6 +27,7 @@ namespace API.Controllers
 
             return user;
         }
+
         [HttpPost]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Post(UserCreateDTO userCreateDTO)
         {
@@ -36,6 +38,7 @@ namespace API.Controllers
 
             return userCreate;
         }
+        
         [HttpPut]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Put(UserUpdateDTO userUpdateDTO)
         {
@@ -43,15 +46,12 @@ namespace API.Controllers
 
             return userUpdate;
         }
+
         [HttpDelete]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Delete(UserDeleteDTO userDeleteDTO)
         {
-            var userDelete = await _userService.DeleteUser(userDeleteDTO);
+            var userDelete = await _userService.RemoveUser(userDeleteDTO);
+        }
 
-            if (!userDelete.IsOperationSuccess)
-                return BadRequest(userDelete);
-
-            return userDelete;
-        } 
     }
 }

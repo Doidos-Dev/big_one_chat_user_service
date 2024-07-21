@@ -1,11 +1,12 @@
-﻿using Data.Persistence;
-using Data.Repositories.Generic;
-using Domain.Entities;
-using Domain.Interfaces;
+﻿
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using UserService.Test.Domain.Entities;
+using UserService.Test.Domain.Interfaces;
+using UserService.Test.Infraestructure.Data.Persistence;
+using UserService.Test.Infraestructure.Data.Repositories.Generic;
 
-namespace Data.Repositories
+namespace UserService.Test.Infraestructure.Data.Repositories
 {
     public class UserRepository : Repository<UserModel>, IUserRepository
     {
@@ -23,7 +24,6 @@ namespace Data.Repositories
             return users;
         }
 
-
         public async Task<UserModel> GetUserAsNoTrackingAsync(Expression<Func<UserModel, bool>> predicate)
         {
             var user = await _dbSet
@@ -31,9 +31,8 @@ namespace Data.Repositories
                 .Where(predicate)
                 .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Email!, p.Password!))
                 .FirstOrDefaultAsync();
-
+                
             return user!;
-
         }
 
         public async Task<UserModel> GetUserTrackingAsync(Expression<Func<UserModel, bool>> predicate)
@@ -54,7 +53,5 @@ namespace Data.Repositories
 
             return userExists;
         }
-
-
     }
 }
