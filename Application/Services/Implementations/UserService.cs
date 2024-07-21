@@ -30,6 +30,7 @@ namespace Application.Services.Implementations
 
         public async Task<APIResponse<UserOutputDTO>> CreateUser(UserCreateDTO userDTO)
         {
+
             bool userExist = await _userRepository.ExistsAsync(x => x.Nickname == userDTO.NickName);
 
             if (userExist)
@@ -88,11 +89,11 @@ namespace Application.Services.Implementations
                 results: [],
                 null);
         }
-
         
         public async Task<APIResponse<UserOutputDTO>> RemoveUser(UserDeleteDTO userDTO)
         {
             var entity = await _userRepository.GetUserTrackingAsync(x => x.Nickname == userDTO.Nickname);
+
 
             if (entity is null)
                 return Message.Response<UserOutputDTO>(

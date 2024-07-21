@@ -61,6 +61,7 @@ namespace Data.Migrations
                         .HasColumnName("ID");
 
                     b.Property<DateTime>("CreatedDate")
+
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CREATED_DATE");
 
@@ -70,7 +71,7 @@ namespace Data.Migrations
                         .HasColumnType("character varying(128)")
                         .HasColumnName("EMAIL");
 
-                    b.Property<DateTime?>("LastSeen")
+                    b.Property<DateTimeOffset?>("LastSeen")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("LAST_SEEN");
 
@@ -92,11 +93,11 @@ namespace Data.Migrations
                         .HasColumnType("character varying(128)")
                         .HasColumnName("PASSWORD");
 
-                    b.Property<string>("Photo")
+                    b.Property<string>("PhotoUrl")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
-                        .HasColumnName("PHOTO");
+                        .HasColumnName("PHOTO_URL");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")

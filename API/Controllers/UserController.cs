@@ -8,14 +8,9 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController(IUserService userService) : ControllerBase
     {
-        private readonly IUserService _userService;
-
-        public UserController(IUserService userService)
-        {
-            _userService = userService;
-        }
+        private readonly IUserService _userService = userService;
 
         [HttpGet]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> GetAll()
@@ -43,7 +38,7 @@ namespace API.Controllers
 
             return userCreate;
         }
-
+        
         [HttpPut]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Put(UserUpdateDTO userUpdateDTO)
         {
@@ -56,11 +51,7 @@ namespace API.Controllers
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Delete(UserDeleteDTO userDeleteDTO)
         {
             var userDelete = await _userService.RemoveUser(userDeleteDTO);
-
-            if (!userDelete.IsOperationSuccess)
-                return BadRequest(userDelete);
-
-            return userDelete;
         }
+
     }
 }

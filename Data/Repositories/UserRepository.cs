@@ -23,6 +23,7 @@ namespace Data.Repositories
             return users;
         }
 
+
         public async Task<UserModel> GetUserAsNoTrackingAsync(Expression<Func<UserModel, bool>> predicate)
         {
             var user = await _dbSet
@@ -32,6 +33,7 @@ namespace Data.Repositories
                 .FirstOrDefaultAsync();
 
             return user!;
+
         }
 
         public async Task<UserModel> GetUserTrackingAsync(Expression<Func<UserModel, bool>> predicate)

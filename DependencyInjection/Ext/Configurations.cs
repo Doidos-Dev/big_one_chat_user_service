@@ -6,7 +6,6 @@ using Data.Repositories.Generic;
 using Domain.Interfaces;
 using Data.Repositories;
 using Microsoft.Extensions.Configuration;
-using Data;
 using Application.Services;
 using Application.Services.Implementations;
 
@@ -26,7 +25,7 @@ namespace DependencyInjection.Ext
             string connectionString =
                 Environment.GetEnvironmentVariable("DATABASE_CONNECTION_SERVICE_USER") ?? connection.GetConnectionString("Local")!;
 
-            service.AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString));
+            service.AddDbContextPool<DatabaseContext>(opt => opt.UseNpgsql(connectionString));
 
             return service;
         }

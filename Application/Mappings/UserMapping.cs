@@ -13,8 +13,8 @@ namespace Application.Mappings
                 userModel.Id,
                 userModel.Name!,
                 userModel.Nickname!,
-                userModel.Status == StatusEnum.Online ? "online" : "offline",
-                userModel.Photo!,
+                userModel.Status,
+                userModel.PhotoUrl!,
                 userModel.Email!,
                 userModel.Password!,
                 userModel.LastSeen,
@@ -31,7 +31,7 @@ namespace Application.Mappings
                 dto.Email,
                 dto.Password,
                 null,
-                DateTime.Now.ToUniversalTime());
+                DateTimeOffset.UtcNow);
         }
 
         public static UserModel ToEntityInputUpdate(this UserUpdateDTO dto)

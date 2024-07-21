@@ -1,4 +1,4 @@
-﻿namespace Application.Enums
+namespace Application.Enums
 {
     public enum CodeEnum
     {

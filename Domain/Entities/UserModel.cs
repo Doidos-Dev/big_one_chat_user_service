@@ -8,28 +8,28 @@ namespace Domain.Entities
         public string? Name { get; private set; }
         public string? Nickname { get; private set; }
         public StatusEnum Status { get; private set; }
-        public string? Photo { get; private set; }
+        public string? PhotoUrl { get; private set; }
         public string? Email { get; private set; }
         public string? Password { get; private set; }
-        public DateTime? LastSeen { get; private set; }
-        public DateTime CreatedDate { get; private set; }
+        public DateTimeOffset? LastSeen { get; private set; }
+        public DateTimeOffset CreatedDate { get; private set; }
         public SettingsModel? Settings { get; set; }
 
         public UserModel(Guid id,
             string name,
             string nickname,
             StatusEnum status,
-            string photo,
+            string photoUrl,
             string email,
             string password,
-            DateTime? lastSeen,
-            DateTime createdDate)
+            DateTimeOffset? lastSeen,
+            DateTimeOffset createdDate)
         {
             Id = id;
             Name = name;
             Nickname = nickname;
             Status = status;
-            Photo = photo;
+            PhotoUrl = photoUrl;
             Email = email;
             Password = password;
             LastSeen = lastSeen;
@@ -49,7 +49,7 @@ namespace Domain.Entities
             Id = id;
             Name = name;
             Nickname = nickname;
-            Photo = photo;
+            PhotoUrl = photo;
             Email = email;
             Password = password;
         }
@@ -64,7 +64,7 @@ namespace Domain.Entities
             Id = id;
             Name = name;
             Nickname = nickname;
-            Photo = photo;
+            PhotoUrl = photo;
             Status = status;
         }
 
@@ -79,6 +79,11 @@ namespace Domain.Entities
                 Status = StatusEnum.Offline;
             else
                 Status = StatusEnum.Online;
+        }
+
+        public void ChangePhoto(string newPhoto)
+        {
+            PhotoUrl = newPhoto;
         }
     }
 }
