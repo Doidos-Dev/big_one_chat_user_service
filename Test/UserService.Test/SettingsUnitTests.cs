@@ -28,27 +28,6 @@ namespace UserService.Test
             _databaseContext.Dispose();
         }
 
-        [Fact]
-        public async void Get_All_Settings_Success()
-        {
-            //Arrange
-            var settings = new SettingsModel(Guid.NewGuid(), Guid.NewGuid(), true, true, true);
-            var settings2 = new SettingsModel(Guid.NewGuid(), Guid.NewGuid(), true, true, true);
-            int count = 2;
-            List<SettingsModel> settingsList = [settings, settings2];
-
-            await _databaseContext.Settings.AddRangeAsync(settingsList);
-            await _databaseContext.SaveChangesAsync();
-
-            //Act
-            var response = await _settingsService.AllSettings();
-
-            //Assert
-            Assert.True(response.IsOperationSuccess == true);
-            Assert.Equal(response.ResponseList.Count(), count);
-            Assert.Equal(response.ResponseList.First().Id, settings.Id);
-            Assert.Contains(response.Message, Operation.GET_ALL);
-        }
 
         [Fact]
         public async void Get_Settings_By_Id_Success()

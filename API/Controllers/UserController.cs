@@ -51,6 +51,8 @@ namespace API.Controllers
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Delete(UserDeleteDTO userDeleteDTO)
         {
             var userDelete = await _userService.RemoveUser(userDeleteDTO);
+
+            return userDelete;
         }
 
     }
