@@ -10,3 +10,4 @@ namespace Application.DTOs.Input
        string Nickname,
        string Password
        );
+}

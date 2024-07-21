@@ -18,11 +18,6 @@ namespace API.Controllers
             _settingsService = settingsService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<APIResponse<SettingsOutputDTO>>> GetAll()
-        {
-            return await _settingsService.AllSettings();
-        }
 
         [HttpGet("{settingsId:guid}")]
         public async Task<ActionResult<APIResponse<SettingsOutputDTO>>> Get(Guid settingsId)
@@ -41,11 +36,6 @@ namespace API.Controllers
         {
             return await _settingsService.UpdateSettings(settingsDTO);
         }
-
-        [HttpDelete]
-        public async Task<ActionResult<APIResponse<SettingsOutputDTO>>> Delete(Guid userId)
-        {
-            return await _settingsService.RemoveSettings(userId);
-        }
+       
     }
 }

@@ -17,7 +17,7 @@ namespace Data.Repositories
         {
             var users = await _dbSet
                .AsNoTracking()
-               .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Status))
+               .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.PhotoUrl!, p.Status))
                .ToListAsync();
 
             return users;
@@ -29,7 +29,7 @@ namespace Data.Repositories
             var user = await _dbSet
                 .AsNoTracking()
                 .Where(predicate)
-                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Email!, p.Password!))
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.PhotoUrl!, p.Email!, p.Password!))
                 .FirstOrDefaultAsync();
 
             return user!;
@@ -40,7 +40,7 @@ namespace Data.Repositories
         {
             var user = await _dbSet
                 .Where(predicate)
-                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Email!, p.Password!))
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.PhotoUrl!, p.Email!, p.Password!))
                 .FirstOrDefaultAsync();
 
             return user!;

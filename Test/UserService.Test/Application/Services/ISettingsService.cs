@@ -13,10 +13,8 @@ namespace UserService.Test.Application.Services
 {
     public interface ISettingsService
     {
-        Task<APIResponse<SettingsOutputDTO>> AllSettings();
         Task<APIResponse<SettingsOutputDTO>> Settings(Guid settingsId);
         Task<APIResponse<SettingsOutputDTO>> SettingsByUserId(Guid userId);
         Task<APIResponse<SettingsOutputDTO>> UpdateSettings(SettingsUpdateDTO settingsDTO);
-        Task<APIResponse<SettingsOutputDTO>> RemoveSettings(Guid userId);
     }
 }
