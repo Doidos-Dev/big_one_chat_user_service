@@ -10,5 +10,6 @@ namespace Application.Services
         Task<APIResponse<UserOutputDTO>> User(Guid userId);
         Task<APIResponse<UserOutputDTO>> CreateUser(UserCreateDTO userDTO);
         Task<APIResponse<UserOutputDTO>> UpdateUser(UserUpdateDTO userDTO);
+        Task<APIResponse<UserOutputDTO>> RemoveUser(UserDeleteDTO userDTO);
     }
 }

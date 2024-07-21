@@ -3,6 +3,7 @@ using Data.Repositories.Generic;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Data.Repositories
 {
@@ -12,24 +13,46 @@ namespace Data.Repositories
         {
         }
 
-        public async Task<IEnumerable<UserModel>> GetAll()
+        public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
             var users = await _dbSet
-                .AsNoTracking()
-                .Select(p => new UserModel(p.Id,p.Name!,p.Nickname!,p.Photo!,p.Status))
-                .ToListAsync();
+               .AsNoTracking()
+               .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Status))
+               .ToListAsync();
 
             return users;
         }
 
-        public async Task<UserModel> GetUser(Guid id)
+        public async Task<UserModel> GetUserAsNoTrackingAsync(Expression<Func<UserModel, bool>> predicate)
         {
             var user = await _dbSet
                 .AsNoTracking()
-                .Select(p => new UserModel(p.Id,p.Name!,p.Nickname!,p.Photo!,p.Email!,p.Password!))
-                .FirstAsync();
+                .Where(predicate)
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Email!, p.Password!))
+                .FirstOrDefaultAsync();
 
-            return user;
+            return user!;
         }
+
+        public async Task<UserModel> GetUserTrackingAsync(Expression<Func<UserModel, bool>> predicate)
+        {
+            var user = await _dbSet
+                .Where(predicate)
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.Photo!, p.Email!, p.Password!))
+                .FirstOrDefaultAsync();
+
+            return user!;
+        }
+
+        public async Task<bool> ExistsAsync(Expression<Func<UserModel, bool>> predicate)
+        {
+            var userExists = await _dbSet
+                .AsNoTracking()
+                .AnyAsync(predicate);
+
+            return userExists;
+        }
+
+
     }
 }
