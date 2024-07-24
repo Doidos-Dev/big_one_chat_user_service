@@ -2,26 +2,19 @@
 using Application.DTOs.Output;
 using Application.Responses;
 using Application.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SettingsConstroller : ControllerBase
+    public class SettingsController : ControllerBase
     {
         private readonly ISettingsService _settingsService;
 
-        public SettingsConstroller(ISettingsService settingsService)
+        public SettingsController(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<APIResponse<SettingsOutputDTO>>> GetAll()
-        {
-            return await _settingsService.AllSettings();
         }
 
         [HttpGet("{settingsId:guid}")]
@@ -40,12 +33,6 @@ namespace API.Controllers
         public async Task<ActionResult<APIResponse<SettingsOutputDTO>>> Put(SettingsUpdateDTO settingsDTO)
         {
             return await _settingsService.UpdateSettings(settingsDTO);
-        }
-
-        [HttpDelete]
-        public async Task<ActionResult<APIResponse<SettingsOutputDTO>>> Delete(Guid userId)
-        {
-            return await _settingsService.RemoveSettings(userId);
         }
     }
 }

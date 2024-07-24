@@ -1,4 +1,3 @@
-using API;
 using API.Middleware;
 using DependencyInjection.Ext;
 
@@ -22,6 +21,7 @@ app.UseMiddleware<ExceptionHandler>();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -8,6 +8,12 @@ using Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Application.Services;
 using Application.Services.Implementations;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using FluentValidation;
+using Application.Validations;
+using Application.DTOs.Input;
 
 namespace DependencyInjection.Ext
 {
@@ -18,7 +24,9 @@ namespace DependencyInjection.Ext
             services
                 .DatabaseConfiguration(configuration)
                 .AddRepositories()
-                .AddServices();
+                .AddServices()
+                .AddValidation()
+                .AddAuth(configuration);
         }
         static IServiceCollection DatabaseConfiguration(this IServiceCollection service, IConfiguration connection)
         {
@@ -43,6 +51,40 @@ namespace DependencyInjection.Ext
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISettingsService, SettingsService>();
+
+            return services;
+        }
+
+        static IServiceCollection AddValidation(this IServiceCollection services) 
+        {
+            services.AddValidatorsFromAssemblyContaining<UserCreateValidator>(ServiceLifetime.Singleton)
+                .AddValidatorsFromAssemblyContaining<UserUpdateValidator>(ServiceLifetime.Singleton);
+
+            return services;
+        }
+        static IServiceCollection AddAuth(this IServiceCollection services,IConfiguration configuration) 
+        {
+            string keyEnv = Environment.GetEnvironmentVariable("SECRET_KEY_BIG_ONE_CHT") ?? configuration["Secret:Key"]!;
+
+            var key = Encoding.ASCII.GetBytes(keyEnv);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
             return services;
         }

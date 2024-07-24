@@ -4,6 +4,7 @@ using Application.Enums;
 using Application.Helper;
 using Application.Mappings;
 using Application.Responses;
+using Domain.Enums;
 using Domain.Interfaces;
 
 namespace Application.Services.Implementations
@@ -56,16 +57,9 @@ namespace Application.Services.Implementations
         {
             var user = await _userRepository.GetUserAsNoTrackingAsync(x => x.Id == userId);
 
-            if (user is null)
-            {
-                return Message.Response<UserOutputDTO>(
-               codeResponse: CodeEnum.NOT_FOUND,
-               message: Operation.GET_SPECIFY_NOTFOUND,
-               isOperationSuccess: false,
-               results: [],
-               null);
-            }
-
+            if (user is {})
+                return Message.Response<UserOutputDTO>(CodeEnum.NOT_FOUND,message: Operation.GET_SPECIFY_NOTFOUND,isOperationSuccess: false,results: [],null);
+            
             return Message.Response(
                 codeResponse: CodeEnum.OK,
                 message: Operation.GET_SPECIFY,
@@ -89,20 +83,32 @@ namespace Application.Services.Implementations
                 results: [],
                 null);
         }
-        
+
+        public async Task<APIResponse<UserOutputDTO>> CheckLogin(UserAuthDTO userDTO)
+        {
+            throw new NotImplementedException();
+            //bool IsUserExistsOnline = await _userRepository.ExistsAsync(p => p.Nickname == userDTO.Nickname && p.Status == StatusEnum.Online);
+
+            //if(IsUserExistsOnline)
+            //    return Message.Response<UserOutputDTO>(CodeEnum.BAD, Operation.USER_EXISTS_ONLINE, false, [], null);
+
+            //var user = await _userRepository.GetUserAsNoTrackingAsync(p => p.Nickname == userDTO.Nickname);
+
+            //bool isPasswordValid = HashPassword.VerifyPasswordHash(userDTO.Password,user.Password);
+
+            //if(!isPasswordValid)
+            //    return Message.Response<UserOutputDTO>(CodeEnum.BAD, Operation.GET_SPECIFY_NOTFOUND, false, [], null);
+
+            //return Message.Response<UserOutputDTO>(CodeEnum.CREATED)
+        }
+
+
         public async Task<APIResponse<UserOutputDTO>> RemoveUser(UserDeleteDTO userDTO)
         {
             var entity = await _userRepository.GetUserTrackingAsync(x => x.Nickname == userDTO.Nickname);
 
-
-            if (entity is null)
-                return Message.Response<UserOutputDTO>(
-                    codeResponse: CodeEnum.NOT_FOUND,
-                    message: Operation.GET_SPECIFY_NOTFOUND,
-                    isOperationSuccess: false,
-                    results: [],
-                    null
-                    );
+            if (entity is { })
+                return Message.Response<UserOutputDTO>(CodeEnum.NOT_FOUND,Operation.GET_SPECIFY_NOTFOUND,false,[],null);
 
             bool isPasswordValid = HashPassword.VerifyPasswordHash(userDTO.Password, entity.Password!);
 
