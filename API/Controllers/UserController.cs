@@ -2,15 +2,20 @@
 using Application.DTOs.Output;
 using Application.Responses;
 using Application.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUserService userService) : ControllerBase
+    public class UserController(IUserService userService,
+        IValidator<UserCreateDTO> userCreateValidator,
+        IValidator<UserUpdateDTO> userUpdateValidator) : ControllerBase
     {
         private readonly IUserService _userService = userService;
+        private readonly IValidator<UserCreateDTO> _userCreateValidator = userCreateValidator;
+        private readonly IValidator<UserUpdateDTO> _userUpdateValidator = userUpdateValidator;
 
         [HttpGet]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> GetAll()
@@ -31,6 +36,11 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Post(UserCreateDTO userCreateDTO)
         {
+            var validateUser = _userCreateValidator.Validate(userCreateDTO);
+
+            if (!validateUser.IsValid)
+                return BadRequest(validateUser.Errors);
+
             var userCreate = await _userService.CreateUser(userCreateDTO);
 
             if (!userCreate.IsOperationSuccess)
@@ -42,6 +52,11 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Put(UserUpdateDTO userUpdateDTO)
         {
+            var validateUser = _userUpdateValidator.Validate(userUpdateDTO);
+
+            if (!validateUser.IsValid)
+                return BadRequest(validateUser.Errors);
+
             var userUpdate = await _userService.UpdateUser(userUpdateDTO);
 
             return userUpdate;
