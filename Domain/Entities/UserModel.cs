@@ -15,6 +15,10 @@ namespace Domain.Entities
         public DateTimeOffset CreatedDate { get; private set; }
         public SettingsModel? Settings { get; set; }
 
+        public UserModel()
+        {
+            
+        }
         public UserModel(Guid id,
             string name,
             string nickname,
@@ -59,13 +63,15 @@ namespace Domain.Entities
             string name,
             string nickname,
             string photo,
-            StatusEnum status)
+            StatusEnum status,
+            SettingsModel settings)
         {
             Id = id;
             Name = name;
             Nickname = nickname;
             PhotoUrl = photo;
             Status = status;
+            Settings = settings;
         }
 
         public void EncryptPasswordEntity(string passwordEncrypted)

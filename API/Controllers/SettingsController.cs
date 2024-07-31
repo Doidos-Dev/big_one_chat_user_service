@@ -9,11 +9,11 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SettingsConstroller : ControllerBase
+    public class SettingsController : ControllerBase
     {
         private readonly ISettingsService _settingsService;
 
-        public SettingsConstroller(ISettingsService settingsService)
+        public SettingsController(ISettingsService settingsService)
         {
             _settingsService = settingsService;
         }

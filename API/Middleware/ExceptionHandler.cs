@@ -1,18 +1,12 @@
 ﻿using Application.Enums;
 using Application.Helper;
-using Application.Responses;
 using System.Text.Json;
 
 namespace API.Middleware
 {
-    public class ExceptionHandler
+    public class ExceptionHandler(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
-
-        public ExceptionHandler(RequestDelegate next)
-        {
-            _next = next;
-        }
+        private readonly RequestDelegate _next = next;
 
         public async Task InvokeAsync(HttpContext httpContext)
         {

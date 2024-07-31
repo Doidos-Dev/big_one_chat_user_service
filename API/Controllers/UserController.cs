@@ -18,9 +18,9 @@ namespace API.Controllers
         private readonly IValidator<UserUpdateDTO> _userUpdateValidator = userUpdateValidator;
 
         [HttpGet]
-        public async Task<ActionResult<APIResponse<UserOutputDTO>>> GetAll()
+        public async Task<ActionResult<APIResponse<UserOutputDTO>>> GetAll([FromQuery(Name = "page")] int page)
         {
-            var users = await _userService.AllUsers();
+            var users = await _userService.AllUsers(page);
 
             return users;
         }
@@ -48,7 +48,7 @@ namespace API.Controllers
 
             return userCreate;
         }
-        
+
         [HttpPut]
         public async Task<ActionResult<APIResponse<UserOutputDTO>>> Put(UserUpdateDTO userUpdateDTO)
         {

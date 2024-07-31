@@ -13,6 +13,8 @@ using FluentValidation;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Application.Security;
+using Application.Security.Implementations;
 
 namespace DependencyInjection.Ext
 {
@@ -48,8 +50,9 @@ namespace DependencyInjection.Ext
 
         static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ISettingsService, SettingsService>();
+            services.AddScoped<IUserService, UserService>()
+            .AddScoped<ISettingsService, SettingsService>()
+            .AddScoped<ICriptographyAss, CriptographyAss>();
 
             return services;
         }
@@ -57,14 +60,15 @@ namespace DependencyInjection.Ext
         static IServiceCollection AddValidation(this IServiceCollection services)
         {
             services.AddValidatorsFromAssemblyContaining<UserCreateValidaton>(ServiceLifetime.Singleton)
-                .AddValidatorsFromAssemblyContaining<UserUpdateValidaton>(ServiceLifetime.Singleton);
+                .AddValidatorsFromAssemblyContaining<UserUpdateValidaton>(ServiceLifetime.Singleton)
+                .AddValidatorsFromAssemblyContaining<SettingsUpdateValidation>(ServiceLifetime.Singleton);
 
             return services;
         }
 
         static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
         {
-            string keyEnv = Environment.GetEnvironmentVariable("SECRET_KEY_BIG_ONE_CHT_AUTH") ?? configuration["Secret:Key"]!;
+            string keyEnv = Environment.GetEnvironmentVariable("AUTH_KEY") ?? configuration["AUTH:SecretKey"]!;
 
             var key = Encoding.ASCII.GetBytes(keyEnv);
 
