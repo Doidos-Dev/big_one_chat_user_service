@@ -98,13 +98,13 @@ namespace Application.Services.Implementations
                 _criptography.Decrypt(user.Nickname!, _privateKey),
                 user.Status,
                 _criptography.Decrypt(user.PhotoUrl!, _privateKey),
-                user.Email,
-                user.Password!,
+                _criptography.Decrypt(user.Email!, _privateKey),
+                _criptography.Decrypt(user.Password!,_privateKey),
                 user.Settings.ToDTO(),
                 user.LastSeen,
                 user.CreatedDate);
 
-            if (user is { })
+            if (user is null)
             {
                 return Message.Response<UserOutputDTO>(
                codeResponse: CodeEnum.NOT_FOUND,

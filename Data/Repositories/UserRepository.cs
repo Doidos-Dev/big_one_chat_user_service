@@ -29,7 +29,8 @@ namespace Data.Repositories
             var user = await _dbSet
                 .AsNoTracking()
                 .Where(predicate)
-                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.PhotoUrl!, p.Email!, p.Password!))
+                .Include(p => p.Settings)
+                .Select(p => new UserModel(p.Id, p.Name!, p.Nickname!, p.PhotoUrl!, p.Email!, p.Password!, p.Settings!))
                 .FirstOrDefaultAsync();
 
             return user!;

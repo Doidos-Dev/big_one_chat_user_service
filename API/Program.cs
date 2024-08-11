@@ -18,7 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<TokenPassHandler>();
+//app.UseMiddleware<TokenPassHandler>();
 app.UseMiddleware<ExceptionHandler>();
 
 app.UseHttpsRedirection();

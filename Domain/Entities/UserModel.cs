@@ -17,7 +17,7 @@ namespace Domain.Entities
 
         public UserModel()
         {
-            
+
         }
         public UserModel(Guid id,
             string name,
@@ -73,6 +73,24 @@ namespace Domain.Entities
             Status = status;
             Settings = settings;
         }
+
+        public UserModel(
+            Guid id,
+            string name,
+            string nickname,
+            string photo,
+            string email,
+            string password,
+            SettingsModel settings)
+          {
+            Id = id;
+            Name = name;
+            Nickname = nickname;
+            PhotoUrl = photo;
+            Email = email;
+            Password = password;
+            Settings = settings;
+           }
 
         public void EncryptPasswordEntity(string passwordEncrypted)
         {
